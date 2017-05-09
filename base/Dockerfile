@@ -19,7 +19,8 @@ RUN echo 'flower:flower' | chpasswd
 RUN rm -rf /var/cache/apk/*
 
 # Set Up Environment
-WORKDIR /home/flower
+# WORKDIR /home/flower
+# USER flower
 
 # Start container
 CMD ["/bin/sh", "-i"]
