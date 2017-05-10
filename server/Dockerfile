@@ -7,6 +7,7 @@ COPY rootfs/ /
 # Installation
 RUN apk update && apk upgrade && \
     apk --no-cache add \
+      openrc \
       supervisor \
       rsyslog \
       supervisor && \
