@@ -7,13 +7,15 @@ RUN apk update && apk upgrade && \
     bash \
     ca-certificates \
     curl \
-    openssl && \
+    openssl \
+    sudo && \
     update-ca-certificates
 
 # Users
 RUN echo 'root:root' | chpasswd
-RUN addgroup -S flower && adduser -S -g flower flower .
+RUN addgroup -S flower && adduser -G flower -g "Lavender Flowerdew" -s /bin/bash -D flower
 RUN echo 'flower:flower' | chpasswd
+RUN echo 'flower ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Clean Up
 RUN rm -rf /var/cache/apk/*
