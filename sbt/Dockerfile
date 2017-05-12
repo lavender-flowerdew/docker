@@ -1,9 +1,7 @@
 FROM lavenderflowerdew/alpine-base:latest
 
 ARG SBT_VERSION=0.13.15
-ENV SBT_VERSION $SBT_VERSION
 ARG JDK_VERSION=8
-ENV JDK_VERSION $JDK_VERSION
 
 LABEL maintainer "lavender.flowerdew@gmail.com"
 LABEL java.version=$JDK_VERSION
