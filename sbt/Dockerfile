@@ -33,4 +33,6 @@ RUN cd /home/flower/ && \
     rm -rf /home/flower/target /home/flower/project
 
 # Start container
-CMD ["/bin/bash", "-i"]
+EXPOSE 3791
+USER root
+CMD ["/usr/sbin/sshd", "-D", "-e"]
