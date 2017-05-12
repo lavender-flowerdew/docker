@@ -1,6 +1,6 @@
 FROM alpine:latest
 
-MAINTAINER Lavender Flowerdew <lavender.flowerdew@gmail.com>
+LABEL maintainer "lavender.flowerdew@gmail.com"
 
 RUN apk update && apk upgrade && \
     apk --no-cache add \
