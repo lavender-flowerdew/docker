@@ -38,7 +38,8 @@ RUN sed -i s~#PermitRootLogin.*~PermitRootLogin\ no~ /etc/ssh/sshd_config && \
     ssh-keygen -A && \
     cd /home/flower && \
     mkdir -p /home/flower/.ssh && \
-    echo "$PUB_KEY" >> /home/flower/.ssh/authorized_keys
+    echo "$PUB_KEY" >> /home/flower/.ssh/authorized_keys && \
+    chown -R flower:flower /home/flower/.ssh
 
 COPY rootfs /
 
