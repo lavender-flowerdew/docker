@@ -27,6 +27,7 @@ RUN rm -rf /var/cache/apk/* && \
 
 
 # Set Up Development Environment
+USER flower
 RUN cd /home/flower/ && \
     mkdir -p /home/flower/dev && \
     /usr/share/sbt/bin/sbt && \
