@@ -1,4 +1,4 @@
-FROM lavenderflowerdew/ssh
+FROM lavenderflowerdew/ssh:latest
 
 ARG SBT_VERSION=0.13.8
 ARG JDK_VERSION=8
