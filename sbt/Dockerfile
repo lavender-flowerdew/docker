@@ -27,12 +27,13 @@ RUN rm -rf /var/cache/apk/* && \
 
 
 # Set Up Development Environment
+USER flower
 RUN cd /home/flower/ && \
     mkdir -p /home/flower/dev && \
     /usr/share/sbt/bin/sbt && \
     rm -rf /home/flower/target /home/flower/project
 
 # Start container
-EXPOSE 3791
 USER root
+EXPOSE 3791
 CMD ["/usr/sbin/sshd", "-D", "-e"]
