@@ -34,11 +34,11 @@ RUN cd /home/flower/ && \
     rm -rf /home/flower/target /home/flower/project
 
 USER root
-RUN cd /root && \
+RUN mkdir /root && \
+    cd /root && \
     /usr/share/sbt/bin/sbt && \
-    rm -rf /home/flower/target /home/flower/project
+    rm -rf /root/target /root/project
 
 # Start container
-USER root
 EXPOSE 3791
 CMD ["/usr/sbin/sshd", "-D", "-e"]
