@@ -1,31 +1,30 @@
 FROM lavenderflowerdew/alpine-base:latest
 
-MAINTAINER Lavender Flowerdew <lavender.flowerdew@gmail.com>
+ARG SBT_VERSION=0.13.8
+ARG JDK_VERSION=8
 
-LABEL java.version=1.8
+LABEL maintainer "lavender.flowerdew@gmail.com"
+LABEL java.version=$JDK_VERSION
 
 # Development Tools Install
 RUN apk update && apk upgrade && \
     apk --no-cache add \
       git \
-      openjdk8 \
+      openjdk$JDK_VERSION \
       vim
 
 # Install SBT
 RUN cd /usr/share && \
-    wget -O sbt-0.13.8.zip https://bintray.com/sbt/native-packages/download_file?file_path=sbt%2F0.13.8%2Fsbt-0.13.8.zip && \
-    unzip sbt-0.13.8.zip && \
-    rm sbt-0.13.8.zip && \
+    wget https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.zip && \
+    unzip sbt-$SBT_VERSION.zip && \
+    rm sbt-$SBT_VERSION.zip && \
     ln -s /usr/share/sbt/conf /etc/sbt && \
-    ln -s /usr/share/sbt/bin/sbt /usr/bin
-
-# Clean Up
-RUN rm -rf /var/cache/apk/* && \
+    ln -s /usr/share/sbt/bin/sbt /usr/bin && \
+    rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
 
 # Set Up Development Environment
-WORKDIR /home/flower
 USER flower
 RUN cd /home/flower/ && \
     mkdir -p /home/flower/dev && \
