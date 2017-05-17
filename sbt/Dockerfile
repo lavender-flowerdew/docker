@@ -19,20 +19,23 @@ RUN cd /usr/share && \
     unzip sbt.zip && \
     rm sbt.zip && \
     ln -s /usr/share/sbt/conf /etc/sbt && \
-    ln -s /usr/share/sbt/bin/sbt /usr/bin
-
-# Clean Up
-RUN rm -rf /var/cache/apk/* && \
+    ln -s /usr/share/sbt/bin/sbt /usr/bin && \
+    rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
-
 # Set Up Development Environment
+USER flower
 RUN cd /home/flower/ && \
     mkdir -p /home/flower/dev && \
     /usr/share/sbt/bin/sbt && \
     rm -rf /home/flower/target /home/flower/project
 
+USER root
+RUN mkdir -p /root && \
+    cd /root/ && \
+    /usr/share/sbt/bin/sbt && \
+    rm -rf /root/target /root/project
+
 # Start container
 EXPOSE 3791
-USER root
 CMD ["/usr/sbin/sshd", "-D", "-e"]
