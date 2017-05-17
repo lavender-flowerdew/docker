@@ -19,10 +19,8 @@ RUN cd /usr/share && \
     unzip sbt-$SBT_VERSION.zip && \
     rm sbt-$SBT_VERSION.zip && \
     ln -s /usr/share/sbt/conf /etc/sbt && \
-    ln -s /usr/share/sbt/bin/sbt /usr/bin
-
-# Clean Up
-RUN rm -rf /var/cache/apk/* && \
+    ln -s /usr/share/sbt/bin/sbt /usr/bin && \
+    rm -rf /var/cache/apk/* && \
     rm -rf /tmp/*
 
 
