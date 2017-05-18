@@ -5,8 +5,7 @@ ARG JDK_VERSION=8
 ARG SCALA_VERSION=2.11.11
 ARG PLAY_VERSION=2.5.14
 
-LABEL maintainer "lavender.flowerdew@gmail.com"
-LABEL java.version=$JDK_VERSION
+LABEL maintainer "lavender.flowerdew@gmail.com" java.version=$JDK_VERSION
 
 # Development Tools Install
 RUN apk update && apk upgrade && \
