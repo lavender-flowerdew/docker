@@ -33,12 +33,6 @@ RUN cd /home/flower/ && \
 USER root
 RUN mkdir -p /root && \
     cd /root/ && \
-    mkdir -p /root/tmp1/project && \
-    cd tmp1 && \
-    echo 'object Hi { def main(args: Array[String]) = println("Hi!") }' >> hw.scala && \
-    echo "sbt.version=0.13.8" >> ./project/build.properties && \
-    /usr/share/sbt/bin/sbt compile && \
-    cd .. && \
     /usr/share/sbt/bin/sbt new playframework/play-java-seed.g8 --name=tmp --organization=com.example --scala_version=2.11.11 --play_version=2.5.14 && \
     cd tmp && \
     /usr/share/sbt/bin/sbt compile && \
