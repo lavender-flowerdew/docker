@@ -2,6 +2,8 @@ FROM lavenderflowerdew/ssh:latest
 
 ARG SBT_VERSION=0.13.15
 ARG JDK_VERSION=8
+ARG SCALA_VERSION=2.11.11
+ARG PLAY_VERSION=2.5.14
 
 LABEL maintainer "lavender.flowerdew@gmail.com"
 LABEL java.version=$JDK_VERSION
@@ -33,7 +35,7 @@ RUN cd /home/flower/ && \
 USER root
 RUN mkdir -p /root && \
     cd /root/ && \
-    /usr/share/sbt/bin/sbt new playframework/play-java-seed.g8 --name=tmp --organization=com.example --scala_version=2.11.11 --play_version=2.5.14 && \
+    /usr/share/sbt/bin/sbt new playframework/play-java-seed.g8 --name=tmp --organization=com.example --scala_version=${SCALA_VERSION}--play_version=${PLAY_VERSION} && \
     cd tmp && \
     /usr/share/sbt/bin/sbt compile && \
     cd .. && \
