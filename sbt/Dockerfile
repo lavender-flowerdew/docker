@@ -43,7 +43,7 @@ RUN mkdir -p /root && \
     cd tmp && \
     /usr/share/sbt/bin/sbt compile && \
     cd .. && \
-    rm -rf /root/tmp
+    rm -rf /root/tmp*
 
 # Start container
 EXPOSE 3791
