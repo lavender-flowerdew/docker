@@ -16,7 +16,7 @@ RUN apk update && apk upgrade && \
 
 # Install SBT
 RUN cd /usr/share && \
-    wget -O sbt.zip "https://bintray.com/sbt/native-packages/download_file?file_path=sbt%2F${SBT_VERSION}%2Fsbt-${SBT_VERSION}.zip" && \
+    wget -O sbt.zip "https://bintray.com/sbt/native-packages/download_file?file_path=sbt%2F${INSTALL_SBT_VERSION}%2Fsbt-${INSTALL_SBT_VERSION}.zip" && \
     unzip sbt.zip && \
     rm sbt.zip && \
     ln -s /usr/share/sbt/conf /etc/sbt && \
