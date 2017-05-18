@@ -4,8 +4,7 @@ ARG INSTALL_SBT_VERSION=0.13.15
 ARG SBT_VERSION=0.13.15
 ARG JDK_VERSION=8
 
-LABEL maintainer "lavender.flowerdew@gmail.com"
-LABEL java.version=$JDK_VERSION
+LABEL maintainer "lavender.flowerdew@gmail.com" java.version=$JDK_VERSION
 
 # Development Tools Install
 RUN apk update && apk upgrade && \
@@ -31,6 +30,8 @@ RUN rm -rf /var/cache/apk/* && \
 
 # Set Up Development Environment
 USER flower
+ENV /home/flower
+WORKDIR /home/flower
 RUN cd /home/flower/ && \
     mkdir -p /home/flower/dev && \
     mkdir -p /home/flower/tmp1/project && \
@@ -39,7 +40,9 @@ RUN cd /home/flower/ && \
     echo "sbt.version=${SBT_VERSION}" >> ./project/build.properties && \
     /usr/share/sbt/bin/sbt compile && \
     cd .. && \
-    rm -rf /home/flower/target /home/flower/project /home/flower/tmp1
+    rm -rf /home/flower/target /home/flower/project /home/flower/tmp*
 
-# Start container
-CMD ["/bin/bash", "-i"]
+
+ENTRYPOINT ["/bin/bash", "-c"]
+
+CMD ["sbt -v"]
