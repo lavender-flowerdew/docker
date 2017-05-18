@@ -27,25 +27,19 @@ RUN cd /usr/share && \
 
 # Set Up Development Environment
 USER flower
-RUN cd /home/flower/ && \
-    mkdir -p /home/flower/dev && \
-    /usr/share/sbt/bin/sbt && \
-    rm -rf /home/flower/target /home/flower/project
-
-USER root
-RUN mkdir -p /root && \
-    cd /root/ && \
-    mkdir -p /root/tmp1/project && \
+RUN mkdir -p /home/flower && \
+    cd /home/flower/ && \
+    mkdir -p /home/flower/tmp1/project && \
     cd tmp1 && \
     echo 'object Hi { def main(args: Array[String]) = println("Hi!") }' >> hw.scala && \
     echo "sbt.version=${SBT_VERSION}" >> ./project/build.properties && \
     /usr/share/sbt/bin/sbt compile && \
-    cd .. && \
+    cd /home/flower/ && \
     /usr/share/sbt/bin/sbt new playframework/play-java-seed.g8 --name=tmp --organization=com.example --scala_version=${SCALA_VERSION} --play_version=${PLAY_VERSION} && \
     cd tmp && \
     /usr/share/sbt/bin/sbt compile && \
-    cd .. && \
-    rm -rf /root/tmp*
+    cd /home/flower/ && \
+    rm -rf /home/flower/tmp*
 
 # Start container
 EXPOSE 3791
