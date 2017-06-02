@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv sh
+
+if [ -e ./setup ]; then
+./setup
+fi
+
+# Start nginx.
+nginx -g "daemon off;"
