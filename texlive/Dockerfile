@@ -22,5 +22,3 @@ RUN cd /usr/share && \
       texlive-full@testing && \
     rm -rf ${RM_DIRS} /usr/share/texlive-20160523b-texmf.tar.xz /usr/share/man /tmp/* /var/cache/apk/* \
       /usr/share/texlive/texlive-20160523-texmf/texmf-dist/source /usr/share/texlive/texlive-20160523-texmf/texmf-dist/doc
-
-VOLUME /usr/share/texlive
