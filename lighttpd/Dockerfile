@@ -5,7 +5,6 @@ LABEL maintainer "lavender.flowerdew@gmail.com"
 RUN mkdir /home/flower/www
 
 COPY ./lighttpd.conf /home/flower/
-COPY ./run.sh /home/flower
 COPY ./www /home/flower/www
 
 RUN apk update && \
@@ -23,6 +22,4 @@ EXPOSE 80
 
 WORKDIR /home/flower
 
-ENTRYPOINT ["./run.sh"]
-
-CMD ["httpd-fastcgi", "fastcgi", "proxy", "/usr/sbin/lighttpd", "-f", "/home/flower/lighttpd-fastcgi.conf", "-D", "&&", "tail", "-f", "/dev/stdout"]
+ENTRYPOINT ["lighttpd","-D","-f","lighttpd.conf"]
