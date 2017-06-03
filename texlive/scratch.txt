@@ -1,7 +1,0 @@
-wget http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2016/texlive-20160523b-texmf.tar.xz && \
-
-wget http://tug.ctan.org/systems/texlive/tlnet/install-tl.zip
-unzip install-tl.zip
-rm install-tl.zip
-cd install-tl-20170413
-./install-tl

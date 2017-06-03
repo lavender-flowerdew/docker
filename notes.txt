@@ -1,0 +1,39 @@
+wget http://ftp.math.utah.edu/pub/tex/historic/systems/texlive/2016/texlive-20160523b-texmf.tar.xz && \
+
+wget http://tug.ctan.org/systems/texlive/tlnet/install-tl.zip
+unzip install-tl.zip
+rm install-tl.zip
+cd install-tl-20170413
+./install-tl
+
+cd /root && \
+curl -L https://cpanmin.us | perl - App::cpanminus && \
+
+"su", "-", "flower", "-c", "./bin/perl-fastcgi-wrapper.pl", "&&", "/usr/sbin/lighttpd", "-D", "-f", "./conf/lighttpd-fastcgi.conf"
+
+su - flower -c "./bin/perl-fastcgi-wrapper.pl" "&&" /usr/sbin/lighttpd -D -f ./conf/lighttpd-fastcgi.conf
+#  ip=`host $2 | awk '/has address/ { print $4 ; exit }'`
+#  ip2=`host $3 | awk '/has address/ { print $4 ; exit }'`
+location ~ /test/([^/]+) {
+  gzip off;
+  include /etc/nginx/common/fastcgi_params;
+  fastcgi_pass 172.17.0.2:9000;
+}
+
+location ~ /test2/([^/]+) {
+  gzip off;
+  include /etc/nginx/common/fastcgi_params;
+  fastcgi_pass 172.17.0.4:9000;
+}
+
+location ~ /test/([^/]+) {
+  gzip off;
+  include /etc/nginx/common/fastcgi_params;
+  fastcgi_pass 172.17.0.2:9000;
+}
+
+location ~ /test2/([^/]+) {
+  gzip off;
+  include /etc/nginx/common/fastcgi_params;
+  fastcgi_pass 172.17.0.4:9000;
+}
