@@ -11,11 +11,13 @@ COPY ./www /home/flower/www
 RUN apk update && \
     apk upgrade && \
     apk --no-cache add \
+      bind-tools \
       lighttpd \
       lighttpd-mod_auth \
       lighttpd-mod_webdav && \
     rm -rf /usr/share/man /tmp/* /var/cache/apk/* && \
-    chown -R flower:flower /home/flower/www
+    touch /home/flower/access.log && \
+    chown -R flower:flower /home/flower/*
 
 EXPOSE 80
 
@@ -23,4 +25,4 @@ WORKDIR /home/flower
 
 ENTRYPOINT ["./run.sh"]
 
-CMD ["/usr/sbin/lighttpd", "-f", "/home/flower/lighttpd.conf", "-D"]
+CMD ["httpd-fastcgi", "fastcgi", "proxy", "/usr/sbin/lighttpd", "-f", "/home/flower/lighttpd-fastcgi.conf", "-D", "&&", "tail", "-f", "/dev/stdout"]
